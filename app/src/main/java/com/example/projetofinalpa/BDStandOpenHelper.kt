@@ -4,12 +4,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class BDStandOpenHelper (
-    context: Context?,
-    name: String?,
-    factory: SQLiteDatabase.CursorFactory?,
-    version: Int
-) : SQLiteOpenHelper(context, name, factory, version) {
+class BDStandOpenHelper (context: Context?) : SQLiteOpenHelper(context, NOME, null, VERSAO) {
 
     override fun onCreate(db: SQLiteDatabase?) {
 
@@ -22,7 +17,10 @@ class BDStandOpenHelper (
 
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-
     }
 
+    companion object{
+        const val NOME = "stand.db"
+        private const val VERSAO = 1
+    }
 }
