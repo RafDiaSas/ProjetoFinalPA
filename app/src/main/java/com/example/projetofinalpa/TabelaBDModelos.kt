@@ -3,16 +3,15 @@ package com.example.projetofinalpa
 import android.database.sqlite.SQLiteDatabase
 import android.provider.BaseColumns
 
-class TabelaBDModelos(db: SQLiteDatabase) : TabelaBD(db, TabelaBDVendas.NOME) {
+class TabelaBDModelos(db: SQLiteDatabase) : TabelaBD(db, NOME) {
     override fun cria() {
         db.execSQL("CREATE TABLE ${TabelaBDFuncionarios.NOME} (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "${TabelaBDMarcas.CAMPO_NOME} TEXT NOT NULL," +
-                "FOREIGN KEY (${TabelaBDModelos.CAMPO_MODELO_ID}_ID) REFERENCES ${TabelaBDMarcas.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT)")
+                "${TabelaBDModelos.CAMPO_NOME} TEXT NOT NULL)")
     }
 
     companion object {
-        const val NOME = "marcas"
-        const val CAMPO_NOME = "fabricante"
-        const val CAMPO_MARCA_ID = "marca_id"
+        const val NOME = "modelos"
+        const val CAMPO_NOME = "modelo"
+        const val CAMPO_MODELO_ID = "modelo_id"
     }
 }

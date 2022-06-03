@@ -3,7 +3,7 @@ package com.example.projetofinalpa
 import android.database.sqlite.SQLiteDatabase
 import android.provider.BaseColumns
 
-class TabelaBDMarcas(db: SQLiteDatabase) : TabelaBD(db, TabelaBDMarcas.NOME) {
+class TabelaBDMarcas(db: SQLiteDatabase) : TabelaBD(db, NOME) {
     override fun cria() {
         db.execSQL("CREATE TABLE ${TabelaBDFuncionarios.NOME} (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "${TabelaBDMarcas.CAMPO_NOME} TEXT NOT NULL," +
