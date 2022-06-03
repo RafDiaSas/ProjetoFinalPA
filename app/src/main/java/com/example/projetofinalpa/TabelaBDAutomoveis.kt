@@ -11,7 +11,9 @@ class TabelaBDAutomoveis(db: SQLiteDatabase) : TabelaBD(db, TabelaBDVendas.NOME)
                 "$CAMPO_MODELO TEXT NOT NULL," +
                 "$CAMPO_COR TEXT NOT NULL," +
                 "$CAMPO_PRECO_VENDA INTEGER NOT NULL," +
-                "$CAMPO_PRECO_COMPRA INTEGER NOT NULL)")
+                "$CAMPO_PRECO_COMPRA INTEGER NOT NULL," +
+                "FOREIGN KEY (${TabelaBDMarcas.CAMPO_MARCA_ID}_ID) REFERENCES ${TabelaBDMarcas.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT,)" +
+                "FOREIGN KEY (${TabelaBDCores.CAMPO_COR_ID}_ID) REFERENCES ${TabelaBDCores.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT)")
     }
 
     companion object{
