@@ -9,8 +9,8 @@ class TabelaBDFuncionarios (db: SQLiteDatabase) : TabelaBD(db, NOME){
         db.execSQL("CREATE TABLE $NOME (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "$CAMPO_NOME TEXT NOT NULL," +
                 "$CAMPO_COMISSAO INTEGER NOT NULL," +
-                "$CAMPO_VEICULOS_VENDIDOS INTEGER NOT NULL," +
-                "FOREIGN KEY ($CAMPO_AUTOMOVEL_ID) REFERENCES ${TabelaBDAutomoveis.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT)")
+                "$CAMPO_VEICULOS_VENDIDOS INTEGER NOT NULL)")
+
     }
 
     companion object{
@@ -18,6 +18,5 @@ class TabelaBDFuncionarios (db: SQLiteDatabase) : TabelaBD(db, NOME){
         const val CAMPO_NOME = "nome"
         const val CAMPO_COMISSAO = "comissão"
         const val CAMPO_VEICULOS_VENDIDOS = "veiculos_vendidos"
-        const val CAMPO_AUTOMOVEL_ID ="automovel_ID"
     }
 }
