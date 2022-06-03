@@ -15,6 +15,5 @@ class TabelaBDVendas (db: SQLiteDatabase) : TabelaBD(db, NOME){
         const val NOME = "vendas"
         const val CAMPO_LUCRO = "lucro"  //lucro = pVenda - pCompra - (comissao * pVenda)
         const val CAMPO_FUNCIONARIO_ID ="funcionario_ID"
-        const val CAMPO_AUTOMOVEL_ID ="automovel_ID"
     }
 }

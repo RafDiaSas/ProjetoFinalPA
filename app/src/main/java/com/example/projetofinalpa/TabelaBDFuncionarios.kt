@@ -10,7 +10,7 @@ class TabelaBDFuncionarios (db: SQLiteDatabase) : TabelaBD(db, NOME){
                 "$CAMPO_NOME TEXT NOT NULL," +
                 "$CAMPO_COMISSAO INTEGER NOT NULL," +
                 "$CAMPO_VEICULOS_VENDIDOS INTEGER NOT NULL," +
-                "FOREIGN KEY (${TabelaBDVendas.CAMPO_AUTOMOVEL_ID}_ID) REFERENCES ${TabelaBDAutomoveis.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT)")
+                "FOREIGN KEY ($CAMPO_AUTOMOVEL_ID) REFERENCES ${TabelaBDAutomoveis.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT)")
     }
 
     companion object{
@@ -18,5 +18,6 @@ class TabelaBDFuncionarios (db: SQLiteDatabase) : TabelaBD(db, NOME){
         const val CAMPO_NOME = "nome"
         const val CAMPO_COMISSAO = "comissão"
         const val CAMPO_VEICULOS_VENDIDOS = "veiculos_vendidos"
+        const val CAMPO_AUTOMOVEL_ID ="automovel_ID"
     }
 }

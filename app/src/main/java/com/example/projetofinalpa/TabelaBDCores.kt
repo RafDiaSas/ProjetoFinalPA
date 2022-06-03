@@ -12,6 +12,5 @@ class TabelaBDCores(db: SQLiteDatabase) : TabelaBD(db, NOME) {
     companion object {
         const val NOME = "cores"
         const val CAMPO_NOME = "cor"
-        const val CAMPO_COR_ID = "cor_id"
     }
 }
