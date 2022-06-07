@@ -4,7 +4,7 @@ import android.content.ContentValues
 
 data class Venda (
     var id: Long,
-    var lucro: Long,
+    var lucro: Long = -1,
     var idFuncionario: Long,
     var idAutomovel: Long
 ) {

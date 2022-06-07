@@ -3,10 +3,10 @@ package com.example.projetofinalpa
 import android.content.ContentValues
 
 data class Funcionario(
-    var id: Long,
     var nome : String,
     var comissao: Long,
-    var veiculos_vendidos: Long
+    var veiculos_vendidos: Long,
+    var id: Long = -1
     ) {
         fun toContentValues() : ContentValues {
             val valores = ContentValues()

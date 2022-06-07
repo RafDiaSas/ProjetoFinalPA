@@ -12,7 +12,6 @@ abstract class TabelaBD (val db: SQLiteDatabase, val nome: String) {
     fun update(values: ContentValues, whereClause: String, whereArgs: Array<String>) =
         db.update(nome, values, whereClause, whereArgs)
 
-
     fun delete(whereClause: String, whereArgs: Array<String>) =
         db.delete(nome, whereClause, whereArgs)
 

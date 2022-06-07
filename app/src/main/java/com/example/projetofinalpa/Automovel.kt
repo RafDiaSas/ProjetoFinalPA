@@ -3,7 +3,8 @@ package com.example.projetofinalpa
 import android.content.ContentValues
 
 data class Automovel (
-    var id: Long,
+    var nome: String,
+    var id: Long = -1,
     var precoVenda: Long,
     var precoCompra: Long,
     var idMarca: Long,
@@ -12,6 +13,7 @@ data class Automovel (
     fun toContentValues() : ContentValues {
         val valores = ContentValues()
 
+        valores.put(TabelaBDAutomoveis.CAMPO_NOME, nome)
         valores.put(TabelaBDAutomoveis.CAMPO_PRECO_VENDA, precoVenda)
         valores.put(TabelaBDAutomoveis.CAMPO_PRECO_COMPRA, precoCompra)
         valores.put(TabelaBDAutomoveis.CAMPO_MARCA_ID, idMarca)

@@ -13,6 +13,9 @@ class BDStandOpenHelper (context: Context?) : SQLiteOpenHelper(context, NOME, nu
         TabelaBDAutomoveis(db).cria()
         TabelaBDFuncionarios(db).cria()
         TabelaBDVendas(db).cria()
+        TabelaBDMarcas(db).cria()
+        TabelaBDModelos(db).cria()
+        TabelaBDCores(db).cria()
     }
 
 
