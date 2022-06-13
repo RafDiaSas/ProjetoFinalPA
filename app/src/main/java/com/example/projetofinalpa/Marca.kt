@@ -4,8 +4,8 @@ import android.content.ContentValues
 
 data class Marca (
     var nome: String,
-    var id: Long = -1,
-    var idModelo: Long
+    var idModelo: Long,
+    var id: Long = -1
 ) {
     fun toContentValues() : ContentValues {
         val valores = ContentValues()

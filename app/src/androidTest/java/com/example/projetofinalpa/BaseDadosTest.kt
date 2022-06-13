@@ -1,14 +1,14 @@
 package com.example.projetofinalpa
 
 import android.database.sqlite.SQLiteDatabase
-import androidx.test.platform.app.InstrumentationRegistry
+import android.provider.BaseColumns
 import androidx.test.ext.junit.runners.AndroidJUnit4
-
+import androidx.test.platform.app.InstrumentationRegistry
+import org.junit.Assert.*
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
-import org.junit.Assert.*
-import org.junit.Before
 
 @RunWith(AndroidJUnit4::class)
 class BaseDadosTest {
@@ -85,9 +85,11 @@ class BaseDadosTest {
     fun consegueInserirMarca() {
         val db = getWritableDatabase()
 
-        insereModelo(db, Modelo("XC-40"))
+        val modelo = Modelo("XC-40")
+        insereModelo(db, modelo)
 
-        insereMarca(db, Marca("Volvo"), marca.id)
+        val marca = Marca("Volvo", modelo.id)
+        insereMarca(db, marca)
 
         db.close()
     }
@@ -96,8 +98,17 @@ class BaseDadosTest {
     fun consegueInserirAutomovel() {
         val db = getWritableDatabase()
 
-        insereAutomovel(db, Automovel("Volvo XC40"))
+        val cor = Cor("Azul")
+        insereCor(db, cor)
 
+        val modelo = Modelo("XC-40")
+        insereModelo(db, modelo)
+
+        val marca = Marca("Volvo", modelo.id)
+        insereMarca(db, marca)
+
+        val automovel = Automovel("Volvo XC-40",18000,16000, 1954, marca.id, cor.id)
+        insereAutomovel(db, automovel)
 
         db.close()
     }
@@ -106,7 +117,7 @@ class BaseDadosTest {
     fun consegueInserirFuncionario() {
         val db = getWritableDatabase()
 
-        insereFuncionario(db, Funcionario("Pedro"))
+        insereFuncionario(db, Funcionario("Pedro", 15, 28))
 
         db.close()
     }
@@ -115,16 +126,177 @@ class BaseDadosTest {
     fun consegueInserirVenda() {
         val db = getWritableDatabase()
 
-        insereVenda(db, Venda("VolvoXC40--sold"))
+        val cor = Cor("Azul")
+        insereCor(db, cor)
+
+        val modelo = Modelo("XC-40")
+        insereModelo(db, modelo)
+
+        val marca = Marca("Volvo", modelo.id)
+        insereMarca(db, marca)
+
+        val automovel = Automovel("Volvo XC-40",18000,16000, 1954, marca.id, cor.id)
+        insereAutomovel(db, automovel)
+
+        val funcionario = Funcionario("Pedro", 15, 28)
+        insereFuncionario(db, funcionario)
+
+        insereVenda(db, Venda(4000, funcionario.id, automovel.id))
 
         db.close()
     }
 
     @Test
-    fun consegueInserirVenda() {
+    fun consegueAlterarCor() {
         val db = getWritableDatabase()
 
-        insereVenda(db, Venda("VolvoXC40--sold"))
+        val cor = Cor("Teste")
+        insereCor(db, cor)
+
+        cor.nome = "Cinzento"
+
+        val registosAlterados = TabelaBDCores(db).update(
+            cor.toContentValues(),
+            "${BaseColumns._ID}=?",
+            arrayOf("${cor.id}"))
+
+        assertEquals(1, registosAlterados)
+
+        db.close()
+    }
+
+    @Test
+    fun consegueAlterarModelo() {
+        val db = getWritableDatabase()
+
+        val modelo = Modelo("Teste")
+        insereModelo(db, modelo)
+
+        modelo.nome = "300SL"
+
+        val registosAlterados = TabelaBDModelos(db).update(
+            modelo.toContentValues(),
+            "${BaseColumns._ID}=?",
+            arrayOf("${modelo.id}"))
+
+        assertEquals(1, registosAlterados)
+
+        db.close()
+    }
+
+    @Test
+    fun consegueAlterarMarca() {
+        val db = getWritableDatabase()
+
+        val cor = Cor("Azul")
+        insereCor(db, cor)
+
+        val modelo = Modelo("XC-40")
+        insereModelo(db, modelo)
+
+        val marca = Marca("Volvo", modelo.id)
+        insereMarca(db, marca)
+
+        val automovel = Automovel("Volvo XC-40",18000,16000, 1954, marca.id, cor.id)
+        insereAutomovel(db, automovel)
+
+        val funcionario = Funcionario("Pedro", 15, 28)
+        insereFuncionario(db, funcionario)
+
+        val registosAlterados = TabelaBDMarcas(db).update(
+            modelo.toContentValues(),
+            "${BaseColumns._ID}=?",
+            arrayOf("${marca.id}"))
+
+        assertEquals(1, registosAlterados)
+
+        db.close()
+    }
+
+    @Test
+    fun consegueAlterarAutomovel() {
+        val db = getWritableDatabase()
+
+        val corCinzento = Cor("Cinzento")
+        insereCor(db, corCinzento)
+
+        val corVermelho = Cor("Vermelho")
+        insereCor(db, corVermelho)
+
+        val modelo = Modelo("300SL")
+        insereModelo(db, modelo)
+
+        val marcaMercedes = Marca("Mercedes", modelo.id)
+        insereMarca(db, marcaMercedes)
+
+        val marcaToyota = Marca("Toyota", modelo.id)
+        insereMarca(db, marcaToyota)
+
+        val automovel = Automovel("Teste", 115000,100000,1954, marcaMercedes.id, corCinzento.id)
+
+        automovel.nome = "Toyota 300SL"
+        automovel.precoVenda = 16000
+        automovel.precoCompra = 12000
+        automovel.ano = 1995
+        automovel.idMarca = marcaToyota.id
+        automovel.idCor = corVermelho.id
+
+        val registosAlterados = TabelaBDAutomoveis(db).update(
+            modelo.toContentValues(),
+            "${BaseColumns._ID}=?",
+            arrayOf("${automovel.id}"))
+
+        assertEquals(1, registosAlterados)
+
+        db.close()
+    }
+
+    @Test
+    fun consegueAlterarFuncionario() {
+        val db = getWritableDatabase()
+
+        val funcionario = Funcionario("Teste",20, 190)
+        insereFuncionario(db, funcionario)
+
+        funcionario.nome = "Camilo"
+        funcionario.comissao = 15
+        funcionario.veiculos_vendidos = 191
+
+        val registosAlterados = TabelaBDModelos(db).update(
+            funcionario.toContentValues(),
+            "${BaseColumns._ID}=?",
+            arrayOf("${funcionario.id}"))
+
+        assertEquals(1, registosAlterados)
+
+        db.close()
+    }
+
+    @Test
+    fun consegueAlterarVenda() {
+        val db = getWritableDatabase()
+
+        val cor = Cor("Azul")
+        insereCor(db, cor)
+
+        val modelo = Modelo("XC-40")
+        insereModelo(db, modelo)
+
+        val marca = Marca("Volvo", modelo.id)
+        insereMarca(db, marca)
+
+        val automovel = Automovel("Volvo XC-40",18000,16000, 1954, marca.id, cor.id)
+        insereAutomovel(db, automovel)
+
+        val funcionario = Funcionario("Pedro", 15, 28)
+        insereFuncionario(db, funcionario)
+
+        val registosAlterados = TabelaBDModelos(db).update(
+            funcionario.toContentValues(),
+            "${BaseColumns._ID}=?",
+            arrayOf("${funcionario.id}"))
+
+        assertEquals(1, registosAlterados)
 
         db.close()
     }

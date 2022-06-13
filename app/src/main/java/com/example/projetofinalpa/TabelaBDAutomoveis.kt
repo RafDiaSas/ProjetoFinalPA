@@ -10,15 +10,17 @@ class TabelaBDAutomoveis(db: SQLiteDatabase) : TabelaBD(db, NOME){
                 "$CAMPO_NOME TEXT NOT NULL," +
                 "$CAMPO_PRECO_VENDA INTEGER NOT NULL," +
                 "$CAMPO_PRECO_COMPRA INTEGER NOT NULL," +
+                "$CAMPO_ANO INTEGER NOT NULL," +
                 "FOREIGN KEY ($CAMPO_MARCA_ID) REFERENCES ${TabelaBDMarcas.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT," +
                 "FOREIGN KEY ($CAMPO_COR_ID) REFERENCES ${TabelaBDCores.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT)")
     }
 
     companion object{
         const val NOME = "automoveis"
-        const val CAMPO_NOME = "nome"    \\nome = nome_marca + " " + nome_modelo
+        const val CAMPO_NOME = "nome"    //nome = nome_marca + " " + nome_modelo
         const val CAMPO_PRECO_VENDA = "preco_venda"
         const val CAMPO_PRECO_COMPRA = "preco_compra"
+        const val CAMPO_ANO = "ano"
         const val CAMPO_MARCA_ID = "marca_id"
         const val CAMPO_COR_ID = "cor_id"
     }

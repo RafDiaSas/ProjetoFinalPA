@@ -4,11 +4,12 @@ import android.content.ContentValues
 
 data class Automovel (
     var nome: String,
-    var id: Long = -1,
     var precoVenda: Long,
     var precoCompra: Long,
+    var ano: Long,
     var idMarca: Long,
-    var idCor: Long
+    var idCor: Long,
+    var id: Long = -1
 ) {
     fun toContentValues() : ContentValues {
         val valores = ContentValues()
