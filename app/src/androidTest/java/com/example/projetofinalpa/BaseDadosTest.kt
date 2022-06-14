@@ -285,16 +285,31 @@ class BaseDadosTest {
         val marca = Marca("Volvo", modelo.id)
         insereMarca(db, marca)
 
-        val automovel = Automovel("Volvo XC-40",18000,16000, 1954, marca.id, cor.id)
-        insereAutomovel(db, automovel)
+        val automovelVolvoXC = Automovel("Volvo XC-40",18000,16000, 1954, marca.id, cor.id)
+        insereAutomovel(db, automovelVolvoXC)
 
-        val funcionario = Funcionario("Pedro", 15, 28)
-        insereFuncionario(db, funcionario)
+        val automovelMercedes123 = Automovel("Mercedes 123",14000,9000, 2001, marca.id, cor.id)
+        insereAutomovel(db, automovelMercedes123)
+
+        val funcionarioPedro = Funcionario("Pedro", 15, 28)
+        insereFuncionario(db, funcionarioPedro)
+
+        val funcionarioLuis = Funcionario("Luis", 15, 28)
+        insereFuncionario(db, funcionarioLuis)
+
+
+        val venda = Venda(12, funcionarioPedro.id, automovelVolvoXC.id)
+        insereVenda(db, venda)
+
+        venda.lucro = 12000
+        venda.idAutomovel = automovelMercedes123.id
+        venda.idFuncionario = funcionarioLuis.id
+
 
         val registosAlterados = TabelaBDModelos(db).update(
-            funcionario.toContentValues(),
+            venda.toContentValues(),
             "${BaseColumns._ID}=?",
-            arrayOf("${funcionario.id}"))
+            arrayOf("${venda.id}"))
 
         assertEquals(1, registosAlterados)
 
